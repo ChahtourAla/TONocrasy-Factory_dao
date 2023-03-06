@@ -1,0 +1,49 @@
+#include "imports/stdlib.fc";
+
+;;Global variables
+global cell daos_list;
+
+;;===============================STORAGE===================================*
+
+() load_data() impure {
+    var ds = get_data().begin_parse();
+    daos_list = ds~load_dict();
+    ds.end_parse();
+}
+
+() save_data(
+    cell daos_list
+) impure inline {
+    set_data(
+        begin_cell()
+        .store_dict(daos_list)
+        .end_cell()
+    );
+}
+
+;;============================MESSAGES=============================
+
+() recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+    slice cs = in_msg_full.begin_parse();
+    int flags = cs~load_uint(4);
+
+    if (flags & 1) { ;; ignore all bounced messages 
+        return ();
+    }
+
+    if (in_msg_body.slice_empty?()) { 
+    return (); 
+    }
+
+    load_data();
+    daos_list = in_msg_body~load_ref();
+    save_data(
+        daos_list
+    );
+}
+
+;;===============================GETTERS==============================
+
+cell get_daos_list() method_id {
+    return get_data();
+}

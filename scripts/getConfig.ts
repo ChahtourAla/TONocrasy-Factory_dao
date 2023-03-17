@@ -8,7 +8,7 @@ export async function run() {
     const client = new TonClient({ endpoint });
 
     // open Factory dao instance by address
-    const factorydaoAddress = Address.parse('EQBYYNiCRZEVOoAnHjhdV1dbvQFIYobb5TmLcshQ80z2ZjsI'); // replace with dao address
+    const factorydaoAddress = Address.parse('EQAig-Xu8d5ZBMLMvsKB8cyGM9DfpMt04VpoIjNxSWzElVoH'); // replace with dao address
     const factorydao = new Daos(factorydaoAddress);
     const factorydaoContract = client.open(factorydao);
 

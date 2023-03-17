@@ -17,7 +17,7 @@ export async function run(provider: NetworkProvider) {
             {
                 daos_list: Dictionary.empty(Dictionary.Keys.Uint(256), ListValue).set(
                     0,
-                    'EQBr0J1v2e5-Wnv1Heerjsv4WlOccTpHBhjklHkNvF-F2nxB'
+                    'EQDhOnvBUDiG4_8NZc1rPed_5IoIaofFlZrq1MJvGtn2H1Zf'
                 ),
             },
             await compile('Daos')
